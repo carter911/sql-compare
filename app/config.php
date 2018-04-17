@@ -241,6 +241,5 @@ return [
 
     'login_user'  => 'chenrj',
     'login_password'  => '123456',
-    'db1' =>'mysql://root:Shigongbao12345@rm-bp130l46o160s3sv9o.mysql.rds.aliyuncs.com:3306/sgb_dev#utf8',
-    'db2' =>'mysql://root:Shigongbao12345@rm-bp130l46o160s3sv9o.mysql.rds.aliyuncs.com:3306/sgb#utf8',
+    
 ];
