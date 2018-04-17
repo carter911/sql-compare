@@ -40,7 +40,6 @@
             ,$ = layui.jquery;
         //监听提交
         form.on('submit(formDemo)', function(data){
-
             $.post('check_login', data.field, function(result){
                 layer.alert(result.message);
                 if(result.code == 200){
