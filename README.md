@@ -8,6 +8,7 @@
 由于设计到数据库安全问题 建议不要在正式服务器上操作以免泄漏数据结构
 下载下来以后修改
 ~~~javascript
+//index/index/index.php
 protected $_db1 = '改成自己的数据库';
 protected $_db2 = '改成自己的数据库';
 ~~~
