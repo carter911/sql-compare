@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>demo</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+</head>
+<body class="layui-layout-body" style="width: 500px;height: 400px;margin: 0 auto;margin-top: 10%">
+    <form class="layui-form" action="">
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend style="text-align: center">施公宝-pc端登陆</legend>
+            <div class="layui-field-box"></div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">手机号码</label>
+                <div class="layui-input-block">
+                    <input type="text" name="mobile" required  lay-verify="mobile" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">验证码</label>
+                <div class="layui-input-block">
+                    <input style="width: 40%; float: left" type="text" name="code" required lay-verify="code" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+                    <input style="width: 40%;float: right" type="button" name="code" class="layui-input" value="获取验证码">
+                </div>
+
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="text-align: center">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即登陆</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</body>
+</html>
+<script src="/static/layui/layui.js"></script>
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form
+            ,$ = layui.jquery;
+        form.render();
+        //监听提交
+
+        form.verify({
+            mobile: [/^1[3|4|5|7|8]\d{9}$/, '手机号必须11位，只能是数字！'],
+           code: function(value){
+                if(value.length < 4){
+                    return '请输入验证码';
+                }
+            }
+        });
+
+        form.on('submit(formDemo)', function(data){
+            $.ajax({
+                url: '{$login_url}',
+                data: data.field,
+                type: "post",
+                dataType: "json",
+                success: function (data) {
+                    layer.closeAll();
+                    if(data.code == 200){
+                        layer.msg(data.msg, {icon: 1, time: 1000});
+                        location.href=data.data.url;
+                    }else{
+                        layer.msg(data.msg, {icon: 2, time: 1000});
+                    }
+                }
+            });return false;
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+
+        function get_code(){
+            $.ajax({
+                url: '{$login_url}',
+                data: data.field,
+                type: "post",
+                dataType: "json",
+                success: function (data) {
+                    layer.closeAll();
+                    if(data.code == 200){
+                        layer.msg(data.msg, {icon: 1, time: 1000});
+                    }else{
+                        layer.msg(data.msg, {icon: 2, time: 1000});
+                    }
+                }
+            });return false;
+        }
+    });
+</script>

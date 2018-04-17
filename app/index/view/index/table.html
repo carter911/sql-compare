@@ -1,0 +1,116 @@
+{include file="index/header" /}
+<div>
+    <a href="?status=0" class="layui-btn layui-btn-sm" >全部表</a>
+    <a href="?status=1" class="layui-btn layui-btn-sm" >相同表</a>
+    <a href="?status=2" class="layui-btn layui-btn-sm layui-btn-danger">只存在DB1</a>
+    <a href="?status=3" class="layui-btn layui-btn-sm layui-btn-danger">只存在DB2</a>
+    <a href="table_list?db=db1" class="layui-btn layui-btn-sm" >DB1表列表</a>
+    <a href=table_list?db=db2 class="layui-btn layui-btn-sm" >DB2表列表</a>
+
+    <a href="?status=3" class="layui-btn layui-btn-sm layui-btn-danger">生成当前页面sql</a>
+    <a href="?status=3" class="layui-btn layui-btn-sm layui-btn-danger">下载当前页面sql</a>
+</div>
+<table class="layui-table">
+    <colgroup>
+        <col width="150">
+        <col width="200">
+        <col width="200">
+    </colgroup>
+    <thead>
+    <tr>
+        <th>数量</th>
+        <th>DB1</th>
+        <th>DB2</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {volist name="data" id="vo" key="val"}
+    <tr>
+        <td>{$val}</td>
+        <td>
+            {in name="vo.status" value="1,2"} {$vo.name} {/in}
+            {notin name="vo.status" value="1,2"}
+            <button data-table="{$vo.name}" data-db="db2" class="layui-btn layui-btn-xs copy">复制该表到db2</button>
+            {/notin}
+        </td>
+        <td>
+            {in name="vo.status" value="1,3"} {$vo.name} {/in}
+            {notin name="vo.status" value="1,3"}
+            <button data-table="{$vo.name}" data-db="db1"  class="layui-btn layui-btn-xs copy">复制该表到db1</button>
+            {/notin}
+        </td>
+        <td>
+            <div class="layui-btn-group">
+                {in name="vo.status" value="1,2"}
+                <button data-db="db1" data-table="{$vo.name}" class="layui-btn layui-btn-xs view">查看表1结构</button>
+                {/in}
+                {in name="vo.status" value="1,3"}
+                <button data-db="db2" data-table="{$vo.name}" class="layui-btn layui-btn-xs view ">查看表2结构</button>
+                {/in}
+                {in name="vo.status" value="1"}
+                <button data-db="db1" data-table="{$vo.name}" class="layui-btn layui-btn-xs diff" >生成结构差异sql</button>
+                {/in}
+            </div>
+        </td>
+    </tr>
+    {/volist}
+
+    </tbody>
+</table>
+{include file="index/footer" /}
+<script>
+    //Demo
+    layui.use(['form','jquery'], function(){
+        var form = layui.form
+            ,$ = layui.jquery;
+
+        form.render();
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+
+        $('.copy').click(function () {
+            var db = $(this).data('db');
+            var table = $(this).data('table');
+            $.get('table_copy', {db:db,table:table}, function(str){
+                layer.closeAll();
+                layer.open({
+                    area:['800px','600px'],
+                    title:'查看表结构',
+                    type: 1,
+                    content: str //注意，如果str是object，那么需要字符拼接。
+                });
+            });
+        });
+
+        $('.view').click(function () {
+            var db = $(this).data('db');
+            var table = $(this).data('table');
+            $.get('table_view', {db:db,table:table}, function(str){
+                layer.closeAll();
+                layer.open({
+                    area:['800px','600px'],
+                    title:'查看表结构',
+                    type: 1,
+                    content: str //注意，如果str是object，那么需要字符拼接。
+                });
+            });
+        });
+        $('.diff').click(function () {
+            var db = $(this).data('db');
+            var table = $(this).data('table');
+            $.get('table_view', {db:db,table:table}, function(str){
+                layer.closeAll();
+                layer.open({
+                    area:['800px','600px'],
+                    title:'比较表结构',
+                    type: 1,
+                    content: str //注意，如果str是object，那么需要字符拼接。
+                });
+            });
+        })
+    });
+</script>

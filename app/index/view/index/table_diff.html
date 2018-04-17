@@ -1,0 +1,80 @@
+{volist name='data_list' id='vo' key='key'}
+<table class="layui-table" style="margin-bottom: 30px">
+    <colgroup>
+        <col width="150">
+        <col width="200">
+        <col width="200">
+    </colgroup>
+    <thead>
+    <tr style="height: 30px">
+        <th colspan="4" ><blockquote class="layui-elem-quote">{$key}-{$vo.create[0]['Table']}</blockquote></th>
+    </tr>
+    <tr>
+        <th>字段名称</th>
+        <th>字段类型</th>
+        <th>是否为空</th>
+        <th>字段描述</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {volist name='vo.field' id='v'}
+    <tr>
+        <td>{$v.Field}</td>
+        <td>{$v.Type}</td>
+        <td>{$v.Null}</td>
+        <td>{$v.Comment}</td>
+
+    </tr>
+    {/volist}
+
+    </tbody>
+</table>
+{/volist}
+
+
+{volist name='data_list1' id='vo' key='key'}
+<table class="layui-table" style="margin-bottom: 30px">
+    <colgroup>
+        <col width="150">
+        <col width="200">
+        <col width="200">
+    </colgroup>
+    <thead>
+    <tr style="height: 30px">
+        <th colspan="4" ><blockquote class="layui-elem-quote">{$key}-{$vo.create[0]['Table']}</blockquote></th>
+    </tr>
+    <tr>
+        <th>字段名称</th>
+        <th>字段类型</th>
+        <th>是否为空</th>
+        <th>字段描述</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {volist name='vo.field' id='v'}
+    <tr>
+        <td>{$v.Field}</td>
+        <td>{$v.Type}</td>
+        <td>{$v.Null}</td>
+        <td>{$v.Comment}</td>
+
+    </tr>
+    {/volist}
+
+    </tbody>
+</table>
+{/volist}
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+        form.render();
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>

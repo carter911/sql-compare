@@ -1,0 +1,24 @@
+<div class="layui-form-item">
+    <label class="layui-form-label">表名</label>
+    <div class="layui-input-block">
+        <input value="{$info.Table}" type="text" name="title" required  lay-verify="required" placeholder="请输入服务器地址" autocomplete="off" class="layui-input">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">生成sql</label>
+    <div class="layui-input-block">
+        <textarea rows="20" name="desc" placeholder="请输入内容" class="layui-textarea">{$info.Create}</textarea>
+    </div>
+</div>
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+        form.render();
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>

@@ -1,0 +1,21 @@
+</div>
+
+<div class="layui-footer">
+    <!-- 底部固定区域 -->
+    © layui.com - 底部固定区域
+</div>
+</div>
+<script src="/static/layui/layui.js"></script>
+<script>
+    var is_login = '{$is_login}';
+    if(is_login == 0){
+        var url = "{:url('admin/login/index')}";
+        location.href = url;
+    }
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+</script>
+</body>
+</html>

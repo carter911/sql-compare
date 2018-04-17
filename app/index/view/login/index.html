@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>sql - compare</title>
+    {load href="/static/layui/css/layui.css" /}
+</head>
+<body class="">
+<h2 style="text-align: center;margin-top: 100px">数据库对比工具</h2>
+<form class="layui-form" action="" style="width: 500px;margin: 50px auto">
+    <div class="layui-form-item" >
+        <label class="layui-form-label">账号</label>
+        <div class="layui-input-inline">
+            <input type="text" name="user_name" required  lay-verify="required" placeholder="请输入账号" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">密码</label>
+        <div class="layui-input-inline">
+            <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">登陆</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+
+
+{load href="/static/layui/layui.js" /}
+<script>
+    //Demo
+    layui.use(['form','jquery'], function(){
+        var form = layui.form
+            ,$ = layui.jquery;
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+
+            $.post('check_login', data.field, function(result){
+                layer.alert(result.message);
+                if(result.code == 200){
+                    location.href = "/index/index/table";
+                }
+            });
+
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

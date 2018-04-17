@@ -1,0 +1,115 @@
+{include file="index/header" /}
+<form class="layui-form" action="">
+    <div class="layui-col-sm5">
+        <div class="layui-form-item">
+            <label class="layui-form-label">服务器地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required  lay-verify="required" placeholder="请输入服务器地址" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">数据库名称</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" required lay-verify="required" placeholder="请输入数据库名称" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">如 test</div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" required lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">如 root</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux"> 如 123456</div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">端口</label>
+            <div class="layui-input-inline">
+                <input value="3306" type="text" name="port" required lay-verify="required" placeholder="请输入端口" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux"> 如 123456</div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">编码</label>
+            <div class="layui-input-block">
+                <input type="radio" name="sex" value="UTF-8" title="UTF-8" checked>
+                <input type="radio" name="sex" value="GB2312" title="GB2312">
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-sm5">
+        <div class="layui-form-item">
+            <label class="layui-form-label">服务器地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required  lay-verify="required" placeholder="请输入服务器地址" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">数据库名称</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" required lay-verify="required" placeholder="请输入数据库名称" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">如 test</div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" required lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">如 root</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux"> 如 123456</div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">端口</label>
+            <div class="layui-input-inline">
+                <input value="3306" type="text" name="port" required lay-verify="required" placeholder="请输入端口" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux"> 如 123456</div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">编码</label>
+            <div class="layui-input-block">
+                <input type="radio" name="sex" value="UTF-8" title="UTF-8" checked>
+                <input type="radio" name="sex" value="GB2312" title="GB2312">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="text-align: center">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+{include file="index/footer" /}
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+        form.render();
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>
