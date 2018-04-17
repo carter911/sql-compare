@@ -241,5 +241,6 @@ return [
 
     'login_user'  => 'chenrj',
     'login_password'  => '123456',
-    
+    'db1' =>'mysql://root:123456@127.0.0.1:3306/sgb_dev#utf8',
+    'db2' =>'mysql://root:123456@127.0.0.1:3306/sgb_dev#utf8',
 ];
