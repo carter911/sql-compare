@@ -103,13 +103,14 @@ class Index extends Base
         $this->assign('data_list',$data_list);
 
 
-        $view = $this->_db2->query("show create table `{$table}`");
-        $info = $this->_db2->query("SHOW FULL COLUMNS FROM `{$table}`");
-        $data_list[0]['field'] = $info;
-        $data_list[0]['create'] = $view;
-        $this->assign('data_list1',$data_list);
+        $view1 = $this->_db2->query("show create table `{$table}`");
+        $info1 = $this->_db2->query("SHOW FULL COLUMNS FROM `{$table}`");
+        $data_list1[0]['field'] = $info1;
+        $data_list1[0]['create'] = $view1;
 
-        return $this->fetch('table_view');
+        $this->assign('data_list1',$data_list1);
+
+        return $this->fetch('table_diff');
     }
 
     public function table_list(Request $request)
