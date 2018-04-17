@@ -11,6 +11,12 @@
 protected $_db1 = '改成自己的数据库';
 protected $_db2 = '改成自己的数据库';
 ~~~
+
+~~~javascript
+//config.php
+'login_user'  => 'chenrj',//改成自己的
+'login_password'  => '123456',//改成自己的
+~~~
 ### 截图
 ![Alt text](https://github.com/carter911/sql-compare/blob/master/public/static/images/login.jpg)
 ![Alt text](https://github.com/carter911/sql-compare/blob/master/public/static/images/home.jpg)
