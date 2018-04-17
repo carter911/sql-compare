@@ -16,13 +16,13 @@ return [
         // 数据库类型
         'type'        => 'mysql',
         // 服务器地址
-        'hostname'    => 'rm-bp130l46o160s3sv9o.mysql.rds.aliyuncs.com',
+        'hostname'    => 'locahost',
         // 数据库名
-        'database'    => 'sgb_dev',
+        'database'    => 'test',
         // 数据库用户名
         'username'    => 'root',
         // 数据库密码
-        'password'    => 'Shigongbao12345',
+        'password'    => '123456',
         // 数据库编码默认采用utf8
         'charset'     => 'utf8',
         // 数据库表前缀
