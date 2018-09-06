@@ -25,5 +25,5 @@ protected $_db2 = '改成自己的数据库';
 ![Alt text](https://github.com/carter911/sql-compare/blob/master/public/static/images/view_table.jpg)
 ![Alt text](https://github.com/carter911/sql-compare/blob/master/public/static/images/db1.jpg)
 ![Alt text](https://github.com/carter911/sql-compare/blob/master/public/static/images/copy.jpg)
-
+如果有问题 欢迎一起讨论 729921697
 
