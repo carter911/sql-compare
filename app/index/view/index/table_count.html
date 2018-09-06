@@ -1,0 +1,109 @@
+{include file="index/header" /}
+<div>
+    <a href="?status=0" class="layui-btn layui-btn-sm" >全部表</a>
+    <a href="?status=1" class="layui-btn layui-btn-sm" >相同表</a>
+    <a href="?status=2" class="layui-btn layui-btn-sm layui-btn-danger">只存在DB1</a>
+    <a href="?status=3" class="layui-btn layui-btn-sm layui-btn-danger">只存在DB2</a>
+    <a href="table_list?db=db1" class="layui-btn layui-btn-sm" >DB1表列表</a>
+    <a href=table_list?db=db2 class="layui-btn layui-btn-sm" >DB2表列表</a>
+
+    <a href="?status=3" class="layui-btn layui-btn-sm layui-btn-danger">生成当前页面sql</a>
+    <a href="?status=3" class="layui-btn layui-btn-sm layui-btn-danger">下载当前页面sql</a>
+</div>
+<table class="layui-table">
+    <colgroup>
+        <col width="150">
+        <col width="200">
+        <col width="200">
+    </colgroup>
+    <thead>
+    <tr>
+        <th>数量</th>
+        <th>表名</th>
+        <th>db1字段数量</th>
+        <th>db2字段数量</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {volist name="db_list" id="vo" key="val"}
+    <tr
+    
+    {switch name="$vo.status" }
+        {case value="1"}style="background: #ddd"{/case}
+        {case value="2"}style="background: #ccc"{/case}
+        {case value="3"}style="background: #999;color:#fff"{/case}
+        {default /}
+    {/switch}
+    
+    >
+        <td >{$val}</td>
+        <td>{$vo.db_name}</td>
+        <td>{$vo.db1_num}</td>
+        <td>{$vo.db2_num}</td>
+        <td>
+            {switch name="$vo.status" }
+            {case value="1"}db1表不存在{/case}
+            {case value="2"}db2表不存在{/case}
+            {case value="3"}字段数量不一致{/case}
+            {default /}正常
+            {/switch}
+        </td>
+        <td>
+            {in name="vo.status" value="1"}
+            <button data-table="{$vo.db_name}" data-db="db1"  class="layui-btn layui-btn-xs copy">复制该表到db1</button>
+            {/in}
+            {in name="vo.status" value="2"}
+            <button data-table="{$vo.db_name}" data-db="db2"  class="layui-btn layui-btn-xs copy">复制该表到db2</button>
+            {/in}
+            {in name="vo.status" value="3"}
+            <button data-db="db2" data-table="{$vo.db_name}" class="layui-btn layui-btn-xs diff ">对比表结构</button>
+            {/in}
+        </td>
+    </tr>
+    {/volist}
+
+    </tbody>
+</table>
+{include file="index/footer" /}
+<script>
+    //Demo
+    layui.use(['form','jquery'], function(){
+        var form = layui.form
+            ,$ = layui.jquery;
+
+        form.render();
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+        $('.diff').click(function () {
+            var db = $(this).data('db');
+            var table = $(this).data('table');
+            $.get('table_diff', {db:db,table:table}, function(str){
+                layer.closeAll();
+                layer.open({
+                    area:['800px','600px'],
+                    title:'比较表结构',
+                    type: 1,
+                    content: str //注意，如果str是object，那么需要字符拼接。
+                });
+            });
+        });
+        $('.copy').click(function () {
+            var db = $(this).data('db');
+            var table = $(this).data('table');
+            $.get('table_copy', {db:db,table:table}, function(str){
+                layer.closeAll();
+                layer.open({
+                    area:['800px','600px'],
+                    title:'查看表结构',
+                    type: 1,
+                    content: str //注意，如果str是object，那么需要字符拼接。
+                });
+            });
+        });
+    });
+</script>

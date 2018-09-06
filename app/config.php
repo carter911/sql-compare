@@ -239,8 +239,11 @@ return [
         'list_rows' => 15,
     ],
 
-    'login_user'  => 'chenrj',
-    'login_password'  => '123456',
-    'db1' =>'mysql://root:123456@127.0.0.1:3306/sgb_dev#utf8',
-    'db2' =>'mysql://root:123456@127.0.0.1:3306/sgb_dev#utf8',
+    'login_user'  => 'sgb',
+    'login_password'  => '51838283',
+
+	'db1_name' => 'sgb_test',
+	'db2_name' => 'sgb',
+    'db1' =>'mysql://sgb:Shigongbao51838283@rm-bp130l46o160s3sv9o.mysql.rds.aliyuncs.com:3306/sgb_test#utf8',
+    'db2' =>'mysql://root:Shigongbao12345@rm-bp130l46o160s3sv9o.mysql.rds.aliyuncs.com:3306/sgb#utf8',
 ];
